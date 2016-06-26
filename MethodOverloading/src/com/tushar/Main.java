@@ -11,6 +11,15 @@ public class Main {
 
         calculateScore();
 
+
+        double centimeters = calcFeetAndInchesToCentimeters(6,2);
+        if(centimeters <0.0) {
+            System.out.println("Invalid parameters");
+        }
+
+        calcFeetAndInchesToCentimeters(157);
+
+
         // Create a method called calcFeetAndInchesToCentimeters
         // It needs to have two parameters.
         // feet is the first parameter, inches is the 2nd parameter
@@ -36,38 +45,31 @@ public class Main {
         // use the link I give you to confirm your code is calculating correctly.
         // Calling another overloaded method just requires you to use the
         // right number of parameters.
-
-        double to_cms = calcFeetAndInchesToCentimeters(6,10);
-        System.out.println("Value in cms: " + to_cms);
-
     }
 
-    public static double calcFeetAndInchesToCentimeters(double inches){
+    public static double calcFeetAndInchesToCentimeters(double feet, double inches) {
 
-        if (inches >= 0){
-
-            return 2.54 * inches;
-        }
-        else
-        {
+        if((feet <0) || ((inches <0) || (inches >12))) {
+            System.out.println("Invalid feet or inches parameters");
             return -1;
         }
+
+        double centimeters = (feet * 12) * 2.54;
+        centimeters += inches * 2.54;
+        System.out.println(feet + " feet, " + inches + " inches = " + centimeters + " cm");
+        return centimeters;
     }
 
-    public static double calcFeetAndInchesToCentimeters(double feet, double inches){
+    public static double calcFeetAndInchesToCentimeters(double inches) {
 
-        if (feet >= 0 && (inches >= 0 && inches <=12)){
-
-            double feet_to_inches = feet * 12;
-            double inch_to_cms = calcFeetAndInchesToCentimeters(feet_to_inches);
-
-            double inch_cm_2 = calcFeetAndInchesToCentimeters(inches);
-
-            return inch_cm_2 + inch_to_cms;
-
-        }else{
+        if(inches < 0) {
             return -1;
         }
+
+        double feet = (int) inches / 12;
+        double remainingInches = (int) inches % 12;
+        System.out.println(inches + " inches is equal to " + feet + " feet and " + remainingInches + " inches");
+        return calcFeetAndInchesToCentimeters(feet, remainingInches);
     }
 
     public static int calculateScore(String playerName, int score) {
